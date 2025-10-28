@@ -61,3 +61,20 @@ TDAecuacion* CargarEcuacionTxT(TDAecuacion* ecu, char* linea)
     ecu = IniciarTDAecuacion(ecuacion,largo,cantVar);
     return ecu;
 }
+
+char* RetornarEcuacion(TDAecuacion* ecu)
+{
+    char* Ecuacion = (char*)malloc(ecu->largo*sizeof(char));
+    if(!Ecuacion)
+    {
+        LimpiarTDAecuacion(ecu);
+
+    }
+    memcpy(Ecuacion,ecu->ecuacion,ecu->largo);
+    return Ecuacion;
+}
+
+int RetornarCantVariables(TDAecuacion* ecu)
+{
+    return ecu->cantVar;
+}

@@ -9,3 +9,5 @@ int main()
     MenuPrincipal(vec);
     return 0;
 }
+
+// @ para potencias, # para raices

@@ -72,6 +72,10 @@ int QuitarElement(TDAvector* vec, int numElem)
  void* DevolverElementoVec(TDAvector* vec, int numElem)
  {
     void* ret = malloc(vec->tamElem);
+    if(!ret)
+    {
+        exit(-1);
+    }
     void* aux = (char*)vec->datos+(numElem*vec->tamElem);
     memcpy(ret,aux,vec->tamElem);
     return ret;

@@ -49,7 +49,7 @@ int VerificarEcuaciones(char* buffer, int* cantVar)
         }
         else if(c == 'y' || c == 'Y')
         {
-            flagY = 1;
+            flagY = 2;
             if(!strchr(allowedChars,prev) && prev!='(')
             {
                 return CARACTER_INVALIDO;
@@ -70,6 +70,10 @@ int VerificarEcuaciones(char* buffer, int* cantVar)
                 return CARACTER_INVALIDO;
             }
             if(strchr(allowedChars,next))
+            {
+                return CARACTER_INVALIDO;
+            }
+            if(c == '/' && next == '0')
             {
                 return CARACTER_INVALIDO;
             }
@@ -279,4 +283,23 @@ void DescargarArchivos(TDAvector* vec)
     }
     fclose(indice);
     fclose(fp);
+}
+
+void SeleccionarEcu(TDAvector* vec)
+{
+    int i;
+    printf("Por favor seleccione una ecuacion para resolver: ");
+    MostrarEcuaciones(vec);
+    scanf("%d", &i);
+    getchar();
+    while(i<0 || i>10)
+    {
+        printf("Por favor ingrese un valor valido: ");
+        scanf("%d", &i);
+        getchar();
+    }
+    TDAecuacion* ecu = DevolverElementoVec(vec,i-1);
+    int res = Evaluar(ecu);
+    printf("El resultado la ecuacion es: %d", res);
+    LimpiarTDAecuacion(ecu);
 }

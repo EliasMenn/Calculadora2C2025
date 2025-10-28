@@ -43,6 +43,7 @@ void MenuPrincipal(TDAvector* vec)
             OpcionE();
             break;
         case 'F':
+            OpcionF(vec);
             break;
         case 'G':
             break;
@@ -95,9 +96,13 @@ void OpcionE()
     printf("\nPresione cualquier tecla para continuar\n");
     getchar();
 }
+void OpcionF(TDAvector* vec)
+{
+    SeleccionarEcu(vec);
+    printf("\nPresione cualquier tecla para continuar\n");
+    getchar();
+}
 void OpcionX(TDAvector* vec)
 {
     LimpiarMemoria(vec);
 }
-
-

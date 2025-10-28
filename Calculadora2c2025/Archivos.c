@@ -124,5 +124,4 @@ void LimpiarArchivos(FILE* indice)
 
     freopen("ArchivosGuardados/indice.bin","wb",indice);
     fclose(indice);
-
 }

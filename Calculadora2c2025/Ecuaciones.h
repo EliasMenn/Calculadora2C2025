@@ -21,4 +21,6 @@ void* LiberarTDAecuacion(void* element); // Libera solo el TDA
 void* LimpiarTDAecuacion(void* element); //Libera el TDA y el puntero interior
 void GuardarEcuacionTxT(TDAecuacion* ecu, FILE* archivo);
 TDAecuacion* CargarEcuacionTxT(TDAecuacion* ecu, char* linea);
+char* RetornarEcuacion(TDAecuacion* ecu);
+int RetornarCantVariables(TDAecuacion* ecu);
 #endif // ECUACIONES_H_INCLUDED

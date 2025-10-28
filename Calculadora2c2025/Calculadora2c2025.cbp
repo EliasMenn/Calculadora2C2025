@@ -43,6 +43,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="Menu.h" />
+		<Unit filename="Parser.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="Parser.h" />
 		<Unit filename="Vector.c">
 			<Option compilerVar="CC" />
 		</Unit>

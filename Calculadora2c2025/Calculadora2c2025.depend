@@ -42,3 +42,57 @@
 	<stdlib.h>
 	<string.h>
 
+1761673409 source:c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\archivos.c
+	"Archivos.h"
+
+1761609985 c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1761681061 source:c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\ecuaciones.c
+	"Ecuaciones.h"
+
+1761680530 c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\ecuaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1761567840 source:c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+
+1761681697 c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\menu.h
+	"soluciones.h"
+
+1761681791 c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\soluciones.h
+	"Ecuaciones.h"
+	"Vector.h"
+	"Archivos.h"
+	"Parser.h"
+
+1761333834 c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1761681697 source:c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\menu.c
+	"Menu.h"
+
+1761681734 source:c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\soluciones.c
+	"soluciones.h"
+
+1761681176 source:c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\vector.c
+	"vector.h"
+
+1761681838 c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\parser.h
+	<stdio.h>
+	<stdlib.h>
+	<math.h>
+	"Vector.h"
+	"Ecuaciones.h"
+
+1761681838 source:c:\users\user\desktop\facultad\tpcalculadora2c2025\calculadora2c2025\parser.c
+	"parser.h"
+
