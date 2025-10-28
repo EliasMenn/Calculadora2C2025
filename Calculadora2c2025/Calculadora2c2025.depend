@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1761567840 source:c:\users\user\desktop\facultad\calculadora2c2025\main.c
+	<stdio.h>
+	<stdlib.h>
+	"Menu.h"
+
+1761606660 source:c:\users\user\desktop\facultad\calculadora2c2025\ecuaciones.c
+	"Ecuaciones.h"
+
+1761595221 c:\users\user\desktop\facultad\calculadora2c2025\ecuaciones.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1761609811 source:c:\users\user\desktop\facultad\calculadora2c2025\soluciones.c
+	"soluciones.h"
+
+1761595496 c:\users\user\desktop\facultad\calculadora2c2025\soluciones.h
+	"Ecuaciones.h"
+	"Vector.h"
+	"Archivos.h"
+
+1761335500 source:c:\users\user\desktop\facultad\calculadora2c2025\vector.c
+	"vector.h"
+
+1761333834 c:\users\user\desktop\facultad\calculadora2c2025\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1761609978 c:\users\user\desktop\facultad\calculadora2c2025\menu.h
+	"soluciones.h"
+
+1761594054 source:c:\users\user\desktop\facultad\calculadora2c2025\menu.c
+	"Menu.h"
+
+1761609742 source:c:\users\user\desktop\facultad\calculadora2c2025\archivos.c
+	"Archivos.h"
+
+1761609985 c:\users\user\desktop\facultad\calculadora2c2025\archivos.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
