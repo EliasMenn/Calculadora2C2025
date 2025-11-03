@@ -1,20 +1,20 @@
 #include "parser.h"
 
-int EvaluarNum(char** Ecu)
+double EvaluarNum(char** Ecu)
 {
     char* Fin;
-    int val = strtol(*Ecu, &Fin, 10);
+    double val = strtod(*Ecu, &Fin);
     *Ecu = Fin;
     return val;
 }
 
-int EvaluarFactor(char** Ecu, int X, int Y)
+double EvaluarFactor(char** Ecu, double X, double Y)
 {
-    int base;
+    double base;
     if(**Ecu == '(')
     {
         (*Ecu)=(*Ecu)+1;
-        base = EvaluarTerm(Ecu, X, Y);
+        base = EvaluarExpr(Ecu, X, Y);
         if(**Ecu == ')')
         {
             (*Ecu)=(*Ecu)+1;
@@ -34,13 +34,13 @@ int EvaluarFactor(char** Ecu, int X, int Y)
     else if(**Ecu == 'X')
     {
         (*Ecu)=(*Ecu)+1;
-        return X;
+        base = X;
     }
 
     else if(**Ecu == 'Y')
     {
         (*Ecu)=(*Ecu)+1;
-        return Y;
+        base = Y;
     }
 
     else if (isdigitP((unsigned char)**Ecu))
@@ -52,33 +52,41 @@ int EvaluarFactor(char** Ecu, int X, int Y)
         printf("Caracter no soportado %c\n.", **Ecu);
         exit(-1);
     }
-
     if(**Ecu == '@')
     {
         (*Ecu)=(*Ecu)+1;
-        int exponente = EvaluarFactor(Ecu,X,Y);
+        double exponente = EvaluarFactor(Ecu,X,Y);
         if(exponente>=0)
             base = pow(base,exponente);
-        else return 0;
+        else
+        {
+            printf("Se ingreso una potencia negativa... Devolviendo 0.\n");
+            return 0.0;
+        }
     }
 
     if(**Ecu == '#')
     {
         (*Ecu)=(*Ecu)+1;
-        int raiz = EvaluarFactor(Ecu,X,Y);
+        double raiz = EvaluarFactor(Ecu,X,Y);
         if(raiz>=0 && base >=0)
-            base = pow(raiz,1/base);
-        else return 0;
+            base = pow(base,1/raiz);
+        else
+        {
+            printf("Se ingreso una raiz negativa... Devolviendo 0.\n");
+            return 0.0;
+        }
     }
 
 
     return base;
 }
 
-int EvaluarTerm(char** Ecu, int X, int Y)
+double EvaluarTerm(char** Ecu, double X, double Y)
 {
-    int val = EvaluarFactor(Ecu,X,Y);
-    while(1)
+    int i = 1;
+    double val = EvaluarFactor(Ecu,X,Y);
+    while(i == 1)
     {
         if(**Ecu == '*')
         {
@@ -88,7 +96,7 @@ int EvaluarTerm(char** Ecu, int X, int Y)
         else if(**Ecu == '/')
         {
             (*Ecu)=(*Ecu)+1;
-            int d = EvaluarTerm(Ecu,X,Y);
+            double d = EvaluarTerm(Ecu,X,Y);
             if(d == 0)
             {
                 printf("Division por cero no permitida.\n");
@@ -97,15 +105,16 @@ int EvaluarTerm(char** Ecu, int X, int Y)
             val = val / d;
         }
         else
-            break;
+            i = 0;
     }
     return val;
 }
 
-int EvaluarExpr(char** Ecu, int X, int Y)
+double EvaluarExpr(char** Ecu, double X, double Y)
 {
-    int val = EvaluarTerm(Ecu, X, Y);
-    while(1)
+    int i = 1;
+    double val = EvaluarTerm(Ecu, X, Y);
+    while(i == 1)
     {
         if(**Ecu == '+')
         {
@@ -118,43 +127,123 @@ int EvaluarExpr(char** Ecu, int X, int Y)
             val = val - EvaluarTerm(Ecu,X,Y);
         }
         else
-            break;
+            i =0;
     }
     return val;
 }
-
-int Evaluar(TDAecuacion* EstrucEcu)
+void Evaluar(TDAecuacion* EstrucEcu)
 {
-    int X = 0, Y = 0;
-    char* ecu;
-    int Res;
+    char Aux;
+    int j;
+    double X = 0, Y = 0, Xaux, Yaux;
+    char* ecu, *ecuAux;
+    double Res;
     ecu = RetornarEcuacion(EstrucEcu);
+    ecuAux = ecu;
     int i = RetornarCantVariables(EstrucEcu);
     if(i==0)
     {
-        printf("\nLa ecuacion no tiene variables, procedemos a resolver");
+            printf("\nLa ecuacion no tiene variables, procedemos a resolver");
+            Res =  EvaluarExpr(&ecu,X,Y);
+            printf("El resultado es %.2lf", Res);
+            free(ecu);
+            return;
     }
-    else if(i==1)
+    printf("Por favor ingrese el metodo de resolucion:\n"
+           "1- Ingresar multiples valores.\n"
+           "2- Ingresar un solo valor.\n");
+    scanf("%d", &j);
+    getchar();
+    while(j<0 || j>2)
     {
-        printf("\nPor favor ingrese el valor para X: ");
-        scanf("%d", &X);
+        printf("Por favor ingrese un valor valido: ");
+        scanf("%d", &j);
         getchar();
     }
-    else if(i==2)
+    if (j == 1)
     {
-        printf("\nPor favor ingrese el valor para Y: ");
-        scanf("%d", &Y);
-        getchar();
+        do
+        {
+            if(i==1)
+            {
+                printf("\nPor favor ingrese el valor para X: ");
+                scanf("%lf", &X);
+                getchar();
+                Res = EvaluarExpr(&ecu,X,Y);
+            }
+            else if(i==2)
+            {
+                printf("\nPor favor ingrese el valor para Y: ");
+                scanf("%lf", &Y);
+                getchar();
+                Res = EvaluarExpr(&ecu,X,Y);
+            }
+            else
+            {
+                printf("\nPor favor ingrese el valor para X: ");
+                scanf("%lf", &X);
+                getchar();
+                printf("\nPor favor ingrese el valor para Y: ");
+                scanf("%lf", &Y);
+                getchar();
+                Res = EvaluarExpr(&ecu,X,Y);
+            }
+            ecu = ecuAux;
+            printf("El resultado fue de %.2lf, desea ingresar nuevos valores para X e Y? (Y para si, N para no)",Res);
+            scanf("%c", &Aux);
+            getchar();
+            while(Aux != 'Y' && Aux != 'N')
+            {
+                printf("Ingreso no valido. ");
+                scanf("%c", &Aux);
+                getchar();
+            }
+        }while(Aux != 'N');
     }
-    else
+    if (j == 2)
     {
-        printf("\nPor favor ingrese el valor para X: ");
-        scanf("%d", &X);
-        getchar();
-        printf("\nPor favor ingrese el valor para Y: ");
-        scanf("%d", &Y);
-        getchar();
+        if(i==1)
+        {
+            printf("\nPor favor ingrese el valor para X: ");
+            scanf("%lf", &X);
+            getchar();
+            for(Xaux = X-5; Xaux <= X+5; Xaux++)
+            {
+                Res = EvaluarExpr(&ecu,Xaux,Y);
+                printf("X: %.2lf f(X): %.2lf\n", Xaux, Res);
+                ecu = ecuAux;
+            }
+        }
+        else if(i==2)
+        {
+            printf("\nPor favor ingrese el valor para Y: ");
+            scanf("%lf", &Y);
+            getchar();
+            for(Yaux = Y-5; Yaux <= Y+5; Yaux++)
+            {
+                Res = EvaluarExpr(&ecu,X,Yaux);
+                printf("Y: %.2lf f(Y): %.2lf\n", Yaux, Res);
+                ecu = ecuAux;
+            }
+        }
+        else
+        {
+            printf("\nPor favor ingrese el valor para X: ");
+            scanf("%lf", &X);
+            getchar();
+            printf("\nPor favor ingrese el valor para Y: ");
+            scanf("%lf", &Y);
+            getchar();
+            for(Xaux = X-5; Xaux <= X+5; Xaux++)
+            {
+                for(Yaux = Y-5;Yaux <= Y+5;Yaux++)
+                {
+                    Res = EvaluarExpr(&ecu,Xaux,Yaux);
+                    printf("(X,Y): (%.2lf, %.2lf) f(X,Y): %.2lf\n", Xaux, Yaux, Res);
+                    ecu = ecuAux;
+                }
+            }
+        }
     }
-    Res = EvaluarExpr(&ecu,X,Y);
-    return Res;
+    free(ecu);
 }

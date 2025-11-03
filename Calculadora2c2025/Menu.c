@@ -46,8 +46,10 @@ void MenuPrincipal(TDAvector* vec)
             OpcionF(vec);
             break;
         case 'G':
+            OpcionG(vec);
             break;
         case 'H':
+            OpcionH();
             break;
         }
     }while(opcion!='X');
@@ -96,11 +98,48 @@ void OpcionE()
     printf("\nPresione cualquier tecla para continuar\n");
     getchar();
 }
+
 void OpcionF(TDAvector* vec)
 {
-    SeleccionarEcu(vec);
+    int i;
+    printf("Ingrese la accion deseada 1-resolver, 2-buscar raices: ");
+    scanf("%d", &i);
+    getchar();
+    if(i!=1 && i!=2)
+    {
+        printf("Ingrese una opcion valida: ");
+        scanf("%d", &i);
+        getchar();
+    }
+    else if (i == 1)
+    {
+        SeleccionarEcu(vec);
+    }
+    else if (i == 2)
+    {
+        BuscarRaices(vec);
+    }
     printf("\nPresione cualquier tecla para continuar\n");
     getchar();
+}
+
+void OpcionG(TDAvector* vec)
+{
+    ElegirYGraficar(vec);
+    printf("\nPresione cualquier tecla para continuar\n");
+    getchar();
+}
+
+void OpcionH()
+{
+    printf("-Ayuda-\n"
+           "1- Los simbolos asignados para las potencias y raices son @ y # respectivamente.\n"
+           "2- Si se fuera a ingresar un valor negativo para una potencia o raiz, el parser \ndevolvera ese termino como 0.00 tras dar un aviso al usuario\n"
+           "3- Si se ingresase un 0 tras un simbolo de division (/) durante la resolucion (ya que al momento de escribir la ecuacion no esta permitido) se le avisara "
+           "al usuario y se cerrara el programa.\n"
+           "4- Al guardar un archivo, si tiene un nombre que ya se encuentre en nuestro indice el archivo previo sera sobreescrito.");
+            printf("\nPresione cualquier tecla para continuar\n");
+            getchar();
 }
 void OpcionX(TDAvector* vec)
 {

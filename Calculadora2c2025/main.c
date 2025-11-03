@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Menu.h"
-int main()
+
+int main(int argc, char *argv[])
 {
     CrearIndice();
     TDAvector* vec;
@@ -10,4 +11,3 @@ int main()
     return 0;
 }
 
-// @ para potencias, # para raices

@@ -9,11 +9,11 @@
 
 #include "Vector.h"
 #include "Ecuaciones.h"
-int EvaluarNum(char** Ecu);
-int EvaluarFactor(char** Ecu, int X, int Y);
-int EvaluarTerm(char** Ecu, int X, int Y);
-int EvaluarExpr(char** Ecu, int X, int Y);
-int Evaluar(TDAecuacion* EstrucEcu);
+double EvaluarNum(char** Ecu);
+double EvaluarFactor(char** Ecu, double X, double Y);
+double EvaluarTerm(char** Ecu, double X, double Y);
+double EvaluarExpr(char** Ecu, double X, double Y);
+void Evaluar(TDAecuacion* EstrucEcu);
 
 
 

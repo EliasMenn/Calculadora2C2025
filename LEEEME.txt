@@ -1,0 +1,7 @@
+Debido a que se usan bibliotecas externas como SDL2 para la seccion graficos, es necesario bajar la version 2.32.10 de SDL2, 
+agregar la carpeta x86_64-w64-mingw32 a donde se encuentre el proyecto,una vez construido el proyecto, para su correcta ejecucion se debera 
+copiar el archivo SDL2.dll de la carpeta x86_64-w64-mingw32/bin a las carpetas bin/Release y bin/Debug antes de ejecutar el codigo, 
+esto asegura el correcto funcionamiento.
+Link al release de SDL2 requerido: https://github.com/libsdl-org/SDL/releases/tag/release-2.32.10
+el asset a descargar es SDL2-devel-2.32.10-mingw.zip, dentro del mismo habra varias carpetas la unica que se debe copiar 
+l proyecto es x86_64-w64-mingw32.
